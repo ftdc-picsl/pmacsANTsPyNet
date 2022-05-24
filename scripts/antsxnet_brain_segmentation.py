@@ -73,30 +73,35 @@ anat = ants.image_read(args.head_image)
 output_seg = None
 
 if (args.no_preprocess):
-    print("Running deep_atropos without preprocessing")
+    print("--- Running deep_atropos without preprocessing ---")
     # Align input to croppedMNI152
     template_file_name_path = antspynet.get_antsxnet_data("croppedMni152")
     template_image = ants.image_read(template_file_name_path)
 
     if (args.brain_mask is None):
+        print("--- Computing brain mask ---")
         probability_mask = antspynet.brain_extraction(anat, modality="t1", verbose=True)
         mask = ants.threshold_image(probability_mask, 0.5, 1, 1, 0)
         mask = mask.iMath_fill_holes()
     else:
         mask = ants.image_read(args.brain_mask)
 
-    template_probability_mask = antspynet.brain_extraction(template_image, modality="t1", verbose=True)
+    print("--- Computing template brain mask ---")
+    template_probability_mask = antspynet.brain_extraction(template_image, modality="t1", verbose=False)
     template_mask = ants.threshold_image(template_probability_mask, 0.5, 1, 1, 0)
+    template_mask = template_mask.iMath_fill_holes()
     template_brain_image = template_image * template_mask
 
     preprocessed_brain_image = anat * mask
 
+    print("--- Registering brain to template ---")
     registration = ants.registration(fixed=template_brain_image, moving=preprocessed_brain_image,
                 type_of_transform="antsRegistrationSyNQuickRepro[a]", verbose=True)
 
     preprocessed_template_space = ants.apply_transforms(fixed = template_image, moving = preprocessed_brain_image,
                            transformlist=registration['fwdtransforms'], interpolator="linear", verbose=True)
 
+    print("--- Deep Atropos segmentation ---")
     deep_seg = antspynet.deep_atropos(preprocessed_template_space, do_preprocessing=False, verbose=True)
 
     # Warp posteriors back to native space
