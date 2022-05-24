@@ -1,11 +1,8 @@
 #!/usr/bin/env python
 
 import argparse
+import os
 import sys
-
-import os.path
-from os import path
-# from xml.dom.minicompat import defproperty
 
 parser = argparse.ArgumentParser(formatter_class=argparse.RawTextHelpFormatter,
                                  prog="cortical_thickness", add_help=False, description='''

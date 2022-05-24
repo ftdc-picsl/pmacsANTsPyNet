@@ -31,6 +31,7 @@ Required args:
 
   runscript
     One of: brain_extraction
+            brain_segmentation
             cortical_thickness
             interactive
             /path/to/custom/script.py
