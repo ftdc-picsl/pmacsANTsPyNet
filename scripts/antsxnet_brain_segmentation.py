@@ -28,6 +28,13 @@ function. Advanced users can turn this off, but should brain extract, bias-corre
 input images. Affine alignment to a template is required and will always be done internally,
 regardless of the "--preprocess" option.
 
+Preprocessing in deep_atropos consists of:
+
+1. Brain extraction
+2. Registration to a template space
+3. N4 bias correction
+4. Denoising
+
 Citation
 --------
 
@@ -44,8 +51,8 @@ required.add_argument("-o", "--output-root", help="Full path to output including
 optional = parser.add_argument_group('Optional arguments')
 optional.add_argument("-h", "--help", action="help", help="show this help message and exit")
 optional.add_argument("-m", "--brain-mask", help="T1w brain mask. Only used if preprocessing is disabled", type=str)
-optional.add_argument("--no-preprocess", help="Skip internal preprocessing, including N4 and denoising. Brain extraction "
-                      "will still be performed unless a brain mask is specified.",
+optional.add_argument("--no-preprocess", help="Skip internal preprocessing, including intensity truncation, N4 and denoising. "
+                      "Brain extraction will still be performed unless a brain mask is specified.",
                     action='store_true')
 optional.add_argument("-t", "--threads", help="Number of threads in tensorflow operations. Use environment variable "
                     "ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS to control threading in ANTs calls", type=int, default=1
