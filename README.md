@@ -26,6 +26,7 @@ runANTsXNet.sh -v latest brain_extraction -h
 The supported scripts are:
 
 * `brain_extraction` - calls the deep learning brain extraction.
+* `brain_segmentation` - calls deep Atropos, with customizable preprocessing
 * `cortical_thickness` - calls the cortical thickness script, and saves results in a
   format similar to the `antsCorticalThickness.sh` pipeline in ANTs.
 
