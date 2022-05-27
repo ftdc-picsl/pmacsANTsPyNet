@@ -29,5 +29,6 @@ The supported scripts are:
 * `brain_segmentation` - calls deep Atropos, with customizable preprocessing
 * `cortical_thickness` - calls the cortical thickness script, and saves results in a
   format similar to the `antsCorticalThickness.sh` pipeline in ANTs.
+* `mri_super_resolution` - MRI super resolution, increases spatial resolution by a factor of two.
 
 Longitudinal cortical thickness is not supported but will be in the future.
