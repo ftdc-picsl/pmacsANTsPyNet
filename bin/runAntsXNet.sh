@@ -33,6 +33,7 @@ Required args:
     One of: brain_extraction
             brain_segmentation
             cortical_thickness
+            desikan_killiany_tourville_labeling
             hippocampal_segmentation
             interactive
             /path/to/custom/script.py
