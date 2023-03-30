@@ -35,6 +35,7 @@ Required args:
             cortical_thickness
             desikan_killiany_tourville_labeling
             hippocampal_segmentation
+            whole_head_inpainting
             interactive
             /path/to/custom/script.py
 
