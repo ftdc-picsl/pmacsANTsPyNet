@@ -67,12 +67,19 @@ tf.config.threading.set_inter_op_parallelism_threads(args.threads)
 
 anat = ants.image_read(args.anatomical_image)
 
+mask = None
+
+if args.cerebellum_mask is not None:
+    print("Using provided cerebellum mask " + args.cerebellum_mask)
+    mask = ants.image_read(args.cerebellum_mask)
+
 # The results to write to disk
 output_seg = None
 
 do_preproc = not args.no_preprocess
 
-output_seg = antspynet.cerebellum_morphology(anat, do_preprocessing=do_preproc, compute_thickness_image=args.compute_thickness, verbose=True)
+output_seg = antspynet.cerebellum_morphology(anat, cerebellum_mask=mask, do_preprocessing=do_preproc,
+                                             compute_thickness_image=args.compute_thickness, verbose=True)
 
 # Write output to disk
 seg_output_file = f'{args.output_root}CerebellumSegmentation.nii.gz'
