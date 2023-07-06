@@ -32,6 +32,7 @@ Required args:
   runscript
     One of: brain_extraction
             brain_segmentation
+            cerebellum_morphology
             cortical_thickness
             desikan_killiany_tourville_labeling
             hippocampal_segmentation
