@@ -27,8 +27,13 @@ The supported scripts are:
 
 * `brain_extraction` - calls the deep learning brain extraction.
 * `brain_segmentation` - calls deep Atropos, with customizable preprocessing
+* `cerebellum_morphology` - cerebellum labeling
 * `cortical_thickness` - calls the cortical thickness script, and saves results in a
   format similar to the `antsCorticalThickness.sh` pipeline in ANTs.
-* `mri_super_resolution` - MRI super resolution, increases spatial resolution by a factor of two.
+* `desikan_killiany_tourville_labeling` - cortical labeling
+* `hippocampal_segmentation` - "deep flash" hippocampal segmentation
+* `mri_super_resolution` - MRI super resolution, increases spatial resolution by a factor
+  of two.
+* `whole_head_inpainting` - inpainting of masked lesions.
 
 Longitudinal cortical thickness is not supported but will be in the future.

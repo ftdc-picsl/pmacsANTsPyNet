@@ -10,7 +10,7 @@ repoDir=${scriptDir%/bin}
 
 if [[ $# -eq 0 ]]; then
     echo "
-  $0 -v <antspynet version> [-B src:dest,src:dest,...] runscript [runscript_options]
+  $0 -v <antspynet version> [-B src:dest,src:dest,...] runscript -- [runscript_options]
 
 Wrapper for calling ANTsPyNet, in a script or interactively.
 
@@ -20,7 +20,7 @@ your home directory and refer to it explicitly as /home/user.
 
 Use absolute paths for bind points.
 
-Script args after the '--' should reference paths within the container. For example, if
+Script args after the runscript should reference paths within the container. For example, if
 you want to use '-i FILE', FILE should be a path that is mounted at run time inside the
 container with -B.
 
@@ -36,6 +36,7 @@ Required args:
             cortical_thickness
             desikan_killiany_tourville_labeling
             hippocampal_segmentation
+            longitudinal_cortical_thickness
             whole_head_inpainting
             interactive
             /path/to/custom/script.py
