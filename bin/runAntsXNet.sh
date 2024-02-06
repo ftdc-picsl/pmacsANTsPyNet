@@ -10,7 +10,7 @@ repoDir=${scriptDir%/bin}
 
 if [[ $# -eq 0 ]]; then
     echo "
-  $0 -v <antspynet version> [-B src:dest,src:dest,...] runscript -- [runscript_options]
+  $0 -v <antspynet version> [-B src:dest,src:dest,...] runscript [runscript_options]
 
 Wrapper for calling ANTsPyNet, in a script or interactively.
 
@@ -36,6 +36,7 @@ Required args:
             cortical_thickness
             desikan_killiany_tourville_labeling
             hippocampal_segmentation
+            lesion_segmentation
             longitudinal_cortical_thickness
             whole_head_inpainting
             interactive
