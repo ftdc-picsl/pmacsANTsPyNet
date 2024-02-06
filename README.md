@@ -32,8 +32,7 @@ The supported scripts are:
   format similar to the `antsCorticalThickness.sh` pipeline in ANTs.
 * `desikan_killiany_tourville_labeling` - cortical labeling
 * `hippocampal_segmentation` - "deep flash" hippocampal segmentation
+* `lesion_segmentation` - lesion segmentation on T1w
 * `mri_super_resolution` - MRI super resolution, increases spatial resolution by a factor
   of two.
-* `whole_head_inpainting` - inpainting of masked lesions.
-
-Longitudinal cortical thickness is not supported but will be in the future.
+* `whole_head_inpainting` - inpainting of masked lesions on T1w (FLAIR to be added)
