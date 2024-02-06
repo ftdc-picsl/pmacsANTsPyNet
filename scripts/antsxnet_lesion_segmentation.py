@@ -7,8 +7,8 @@ import os.path
 from os import path
 
 parser = argparse.ArgumentParser(formatter_class=argparse.RawTextHelpFormatter,
-                                 prog='whole_head_inpainting', add_help = False, description='''
-Wrapper for whole_head_inpainting in AntsPyNet.
+                                 prog='lesion_segmentation', add_help = False, description='''
+Wrapper for lesion_segmentation in ANTsPyNet.
 
 https://github.com/ANTsX/ANTsPyNet/blob/master/antspynet/utilities/inpainting.py
 
@@ -18,14 +18,10 @@ Tustison, N.J., Cook, P.A., Holbrook, A.J. et al. The ANTsX ecosystem for quanti
 Sci Rep 11, 9068 (2021). https://doi.org/10.1038/s41598-021-87564-6
 ''')
 required = parser.add_argument_group('Required arguments')
-required.add_argument('-a', '--anatomical-image', help='Input image to inpaint', type=str, required=True)
-required.add_argument('-m', '--mask', help='Lesion mask file', type=str, required=True)
+required.add_argument('-a', '--anatomical-image', help='Input image to segment, not skull-stripped', type=str, required=True)
 required.add_argument('-o', '--output', help='Output file', type=str, required=True)
 optional = parser.add_argument_group('Optional arguments')
 optional.add_argument('-h', '--help', action='help', help='show this help message and exit')
-optional.add_argument('--modality', help='Modality, currently only "t1"', type=str, default='t1')
-optional.add_argument('--mode', help='Mode, one of "axial", "coronal", "sagittal", "average", "meg". See usage in ANTsPyNet',
-                      type=str, default='axial')
 optional.add_argument('-t', '--threads', help='Number of threads in tensorflow operations. Use environment variable ' \
                     'ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS to control threading in ANTs calls', type=int, default=1
                     )
@@ -48,9 +44,8 @@ tf.config.threading.set_inter_op_parallelism_threads(threads)
 
 anat = ants.image_read(anatomical_image)
 
-mask = ants.image_read(args.mask)
 
-output = antspynet.whole_head_inpainting(anat, mask, modality=args.modality, mode=args.mode, verbose=True)
+output = antspynet.lesion_segmentation(anat, do_preprocessing=True, verbose=True)
 
 ants.image_write(output, output_file)
 
