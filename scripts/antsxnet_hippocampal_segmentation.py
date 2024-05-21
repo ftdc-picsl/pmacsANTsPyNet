@@ -7,7 +7,7 @@ import os.path
 from os import path
 
 parser = argparse.ArgumentParser(formatter_class=argparse.RawTextHelpFormatter,
-                                 prog="brain_extraction", add_help = False, description='''
+                                 prog="deep_flash", add_help = False, description='''
 Wrapper for deep_flash in AntsPyNet.
 
     Hippocampal/Enthorhinal segmentation using "Deep Flash"
@@ -44,8 +44,9 @@ optional.add_argument("-h", "--help", action="help", help="show this help messag
 optional.add_argument("-t", "--threads", help="Number of threads in tensorflow operations. Use environment variable " \
                     "ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS to control threading in ANTs calls", type=int, default=1
                     )
-optional.add_argument("--use-rank-intensity", help="Use a rank intensity transform on the cropped ROI.", action='store_true', required=False, default=True)
+optional.add_argument("--use-rank-intensity", help="Use a rank intensity transform on the cropped ROI.", action='store_true', required=False, default=False)
 optional.add_argument('--no-use-rank-intensity', help="Use histogram matching on the cropped template ROI.", dest='use-rank-intensity', action='store_false')
+optional.add_argument('--parcellation', help="Use a particular parcellation.", type=str, default="yassa")
 args = parser.parse_args()
 
 
@@ -69,7 +70,7 @@ t2w_image = None
 if (t2w is not None):
     t2w_image = ants.image_read(t2w)
 
-output = antspynet.deep_flash(t1w_image, t2w_image, use_rank_intensity=args.use_rank_intensity, verbose=True)
+output = antspynet.deep_flash(t1w_image, t2w_image, use_rank_intensity=args.use_rank_intensity,  which_parcellation=args.parcellation, verbose=True)
 
 ants.image_write(output['segmentation_image'], output_file)
 
