@@ -71,6 +71,10 @@ shift $((OPTIND-1))
 module load singularity
 
 export SINGULARITYENV_ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=$LSB_DJOB_NUMPROC
+export SINGULARITYENV_TMPDIR=/tmp
+
+jobTmpDir=$( mktemp -d -p /scratch antspynet.${LSB_JOBID}.XXXXXXX.tmpdir ) ||
+    ( echo "Could not create job temp dir ${jobTmpDir}"; exit 1 )
 
 image="${repoDir}/containers/antspynet-${containerVersion}-with-data.sif"
 
@@ -114,7 +118,7 @@ if [[ ! -f "${runScript}" ]]; then
 fi
 
 singularityArgs="$singularityArgs \
- -B ${runScript}:/opt/runScript.py"
+ -B ${jobTmpDir}:/tmp,${runScript}:/opt/runScript.py"
 
 echo "
 --- Container details ---"
@@ -136,6 +140,9 @@ $cmd $@
 # Run this way to preserve quoted args
 ($cmd "$@")
 singExit=$?
+
+# clean up tmp
+rm -rf ${jobTmpDir}
 
 if [[ $singExit -ne 0 ]]; then
     echo "
