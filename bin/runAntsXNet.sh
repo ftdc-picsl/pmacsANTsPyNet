@@ -52,15 +52,19 @@ Options:
      'src' is an absolute path on the local file system and 'dest' is an absolute path inside the container.
      The run script, if provided, is mounted automatically.
 
+  -w workdir
+     Initial working directory inside the container.
 "
     exit 1
 fi
 
+workdir=""
 
-while getopts "B:v:" opt; do
+while getopts "B:v:w:" opt; do
     case $opt in
         B) userBindPoints=$OPTARG;;
         v) containerVersion=$OPTARG;;
+        w) workdir=$OPTARG;;
         \?) echo "Unknown option $OPTARG"; exit 2;;
         :) echo "Option $OPTARG requires an argument"; exit 2;;
     esac
@@ -82,6 +86,10 @@ scriptArg=$1
 shift
 
 singularityArgs="--cleanenv --no-home --home /home/antspyuser"
+
+if [[ -n "${workdir}" ]]; then
+  singularityArgs="$singularityArgs --pwd $workdir"
+fi
 
 if [[ -n "$userBindPoints" ]]; then
   singularityArgs="$singularityArgs \
