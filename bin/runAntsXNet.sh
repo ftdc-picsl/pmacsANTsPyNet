@@ -38,7 +38,9 @@ Required args:
             hippocampal_segmentation
             lesion_segmentation
             longitudinal_cortical_thickness
-            whole_head_inpainting
+	    shiva_pvs_segmentation
+	    shiva_wmh_segmentation
+	    whole_head_inpainting
             interactive
             /path/to/custom/script.py
 
