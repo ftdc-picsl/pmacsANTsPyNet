@@ -30,19 +30,11 @@ Required args:
      ANTsPyNet version. The script will look for containers/antspynet-[version]-with-data.sif.
 
   runscript
-    One of: brain_extraction
-            brain_segmentation
-            cerebellum_morphology
-            cortical_thickness
-            desikan_killiany_tourville_labeling
-            hippocampal_segmentation
-            lesion_segmentation
-            longitudinal_cortical_thickness
-            whole_head_inpainting
+    One of: t1w_segmentation (does cortical + subcortical segmentation)
             interactive
             /path/to/custom/script.py
 
-    The run script arg can either be a reference to supported functions like brain_extraction, or a custom
+    The run script arg can either be a reference to supported functions like t1w_segmentation, or a custom
     script. To see usage for supported functions, add the option -h.
 
 Options:
@@ -75,6 +67,8 @@ shift $((OPTIND-1))
 module load singularity
 
 export SINGULARITYENV_ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=$LSB_DJOB_NUMPROC
+export SINGULARITYENV_TF_NUM_INTRAOP_THREADS=1
+export SINGULARITYENV_TF_NUM_INTEROP_THREADS=1
 export SINGULARITYENV_TMPDIR=/tmp
 
 jobTmpDir=$( mktemp -d -p /scratch antspynet.${LSB_JOBID}.XXXXXXX.tmpdir ) ||
