@@ -59,6 +59,8 @@ be_mask = ants.threshold_image(be_seg, 0.9, 1.1)
 
 ants.image_write(be_mask, f"{output_root}_brain_mask.nii.gz")
 
+ants.image_write(be_seg, f"{output_root}_head_mask.nii.gz")
+
 ## deep_atropos segmentation
 output_seg = antspynet.deep_atropos(anat, do_preprocessing=True, verbose=True)
 
