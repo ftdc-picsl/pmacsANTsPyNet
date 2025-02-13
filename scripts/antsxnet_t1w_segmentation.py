@@ -74,9 +74,9 @@ ants.image_write(output_seg['segmentation_image'], seg_output_file)
 #    ants.image_write(image, output_file)
 
 
-## Whole hippocampal segmentation
-hipp = antspynet.hippmapp3r_segmentation(anat, verbose=True)
-ants.image_write(hipp, f"{output_root}_hippocampus_segmentation.nii.gz")
+## Whole hippocampal segmentation - can use HOA for hippo labels
+# hipp = antspynet.hippmapp3r_segmentation(anat, verbose=True)
+# ants.image_write(hipp, f"{output_root}_hippocampus_segmentation.nii.gz")
 
 ## Claustrum
 # Quite inconsistent results
