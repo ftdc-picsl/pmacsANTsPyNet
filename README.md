@@ -20,19 +20,10 @@ run time.
 A custom script can be run by providing the path to the script, or use one of the
 supported scripts listed below. Run with `-h` to get help, eg:
 ```
-runANTsXNet.sh -v latest brain_extraction -h
+runANTsXNet.sh -v latest t1w_segmentation -h
 ```
 
 The supported scripts are:
 
-* `brain_extraction` - calls the deep learning brain extraction.
-* `brain_segmentation` - calls deep Atropos, with customizable preprocessing
-* `cerebellum_morphology` - cerebellum labeling
-* `cortical_thickness` - calls the cortical thickness script, and saves results in a
-  format similar to the `antsCorticalThickness.sh` pipeline in ANTs.
-* `desikan_killiany_tourville_labeling` - cortical labeling
-* `hippocampal_segmentation` - "deep flash" hippocampal segmentation
-* `lesion_segmentation` - lesion segmentation on T1w
-* `mri_super_resolution` - MRI super resolution, increases spatial resolution by a factor
-  of two.
-* `whole_head_inpainting` - inpainting of masked lesions on T1w (FLAIR to be added)
+* `t1w_segmentation` - calls t1w brain extraction and segmentation for cortial + subcortical structures
+
