@@ -108,7 +108,7 @@ ants.image_write(dkt['lobar_parcellation'], f"{output_root}_desikan_killiany_tou
 ## Cerebellum extraction
 # Use HOA mask for cerebellum extraction, seems to be more accurate than atropos
 # You can also use registration to a template to get the mask, but it's slower
-cerebellum_mask = ants.threshold_image(hoa['segmentation_image'], 29.5, 32.5)
+cerebellum_mask = ants.threshold_image(hoa['segmentation_image'], 28.5, 32.5)
 
 cerebellum = antspynet.cerebellum_morphology(anat, cerebellum_mask=cerebellum_mask, compute_thickness_image=False,
                                              verbose=True)
