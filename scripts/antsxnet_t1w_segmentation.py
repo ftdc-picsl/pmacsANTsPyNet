@@ -62,7 +62,7 @@ ants.image_write(be_mask, f"{output_root}_brain_mask.nii.gz")
 ants.image_write(be_seg, f"{output_root}_head_mask.nii.gz")
 
 ## deep_atropos segmentation
-output_seg = antspynet.deep_atropos(anat, do_preprocessing=True, verbose=True)
+output_seg = antspynet.deep_atropos([anat, None, None], do_preprocessing=True, verbose=True)
 
 seg_output_file = f"{output_root}_brain_segmentation.nii.gz"
 

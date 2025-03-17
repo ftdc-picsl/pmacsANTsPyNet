@@ -31,6 +31,7 @@ Required args:
 
   runscript
     One of: t1w_segmentation (does cortical + subcortical segmentation)
+            multimodal_atropos_segmentation (does BE + deep atropos only, T1w + optional T2w, FA)
             interactive
             /path/to/custom/script.py
 
